@@ -12,9 +12,13 @@ public class EndermanOverhaul {
 
     public static void init() {
         CONFIGURATOR.register(EndermanOverhaulConfig.class);
+
         NetworkHandler.init();
+        ModDataComponents.DATA_COMPONENT_TYPES.init();
         ModBlocks.BLOCKS.init();
+        ModArmorMaterials.ARMOR_MATERIALS.init();
         ModItems.ITEMS.init();
+        ModItems.TABS.init();
         ModEntityTypes.ENTITY_TYPES.init();
         ModParticleTypes.PARTICLE_TYPES.init();
         ModSoundEvents.SOUND_EVENTS.init();

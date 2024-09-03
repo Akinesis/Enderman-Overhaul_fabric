@@ -13,8 +13,6 @@ import tech.alexnijjar.endermanoverhaul.common.constants.ConstantComponents;
 import tech.alexnijjar.endermanoverhaul.common.registry.ModItems;
 
 import java.util.List;
-import java.util.function.Consumer;
-import java.util.function.Supplier;
 
 public class CorruptedShieldItem extends ShieldItem implements GeoItem {
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
@@ -40,11 +38,4 @@ public class CorruptedShieldItem extends ShieldItem implements GeoItem {
         tooltipComponents.add(ConstantComponents.CORRUPTED_SHIELD_TOOLTIP);
     }
 
-    public void createRenderer(Consumer<Object> consumer) {
-        throw new AssertionError("This should only be called on fabric!");
-    }
-
-    public Supplier<Object> getRenderProvider() {
-        throw new AssertionError("This should only be called on fabric!");
-    }
 }

@@ -9,10 +9,8 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Tiers;
+import net.minecraft.world.item.*;
+import net.minecraft.world.level.ItemLike;
 import org.apache.commons.lang3.NotImplementedException;
 import tech.alexnijjar.endermanoverhaul.EndermanOverhaul;
 import tech.alexnijjar.endermanoverhaul.common.items.HoodItem;
@@ -28,10 +26,7 @@ public class ModItems {
     public static final ResourcefulRegistry<Item> SPAWN_EGGS = ResourcefulRegistries.create(ITEMS);
     public static final ResourcefulRegistry<Item> PEARLS = ResourcefulRegistries.create(ITEMS);
     public static final ResourcefulRegistry<CreativeModeTab> TABS = ResourcefulRegistries.create(BuiltInRegistries.CREATIVE_MODE_TAB, EndermanOverhaul.MOD_ID);
-    public static final RegistryEntry<CreativeModeTab> TAB = TABS.register("main", () -> new ResourcefulCreativeModeTab(ResourceLocation.fromNamespaceAndPath(EndermanOverhaul.MOD_ID, "main"))
-        .setItemIcon(ModItems.CORRUPTED_PEARL)
-        .addRegistry(ITEMS)
-        .build());
+
 
     public static final RegistryEntry<Item> BADLANDS_ENDERMAN_SPAWN_EGG = SPAWN_EGGS.register("badlands_enderman_spawn_egg", createSpawnEggItem(ModEntityTypes.BADLANDS_ENDERMAN, 0xa75537, 0x5a7a60, new Item.Properties()));
     public static final RegistryEntry<Item> CAVE_ENDERMAN_SPAWN_EGG = SPAWN_EGGS.register("cave_enderman_spawn_egg", createSpawnEggItem(ModEntityTypes.CAVE_ENDERMAN, 0xc8c5b6, 0xa88554, new Item.Properties()));
@@ -72,7 +67,7 @@ public class ModItems {
     public static final RegistryEntry<Item> WARPED_PEARL = PEARLS.register("warped_pearl", () -> new WarpedPearlItem(new Item.Properties().stacksTo(16)));
 
     public static final RegistryEntry<Item> ENDERMAN_TOOTH = ITEMS.register("enderman_tooth", () -> new Item(new Item.Properties()));
-    public static final RegistryEntry<Item> CORRUPTED_BLADE = ITEMS.register("corrupted_blade", () -> new CorruptedBladeItem(Tiers.IRON, 3, -2.4f, new Item.Properties()));
+    public static final RegistryEntry<Item> CORRUPTED_BLADE = ITEMS.register("corrupted_blade", () ->  new CorruptedBladeItem(Tiers.IRON, new Item.Properties().attributes(SwordItem.createAttributes(Tiers.IRON, 3, -2.4f))));
     public static final RegistryEntry<Item> CORRUPTED_SHIELD = ITEMS.register("corrupted_shield", () -> new CorruptedShieldItem(new Item.Properties().durability(672)));
 
 
