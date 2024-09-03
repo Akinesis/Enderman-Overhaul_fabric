@@ -21,9 +21,9 @@ public class EndIslandsEndermanRenderer extends BaseEndermanEntityRenderer<EndIs
             getTexture(ModEntityTypes.END_ISLANDS_ENDERMAN.get()),
             END_ISLANDS_ANIMATION));
 
-        addRenderLayer(new CustomEnderEyesLayer<>(this, new ResourceLocation(EndermanOverhaul.MOD_ID, "textures/entity/end_islands/end_islands_enderman_glow.png")));
-        addRenderLayer(new CustomEnderEyesLayer<>(this, new ResourceLocation(EndermanOverhaul.MOD_ID, "textures/entity/end_islands/end_islands_enderman_glow_2.png")));
-        addRenderLayer(new CustomEnderEyesLayer<>(this, new ResourceLocation(EndermanOverhaul.MOD_ID, "textures/entity/end_islands/end_islands_enderman_glow_3.png")));
+        addRenderLayer(new CustomEnderEyesLayer<>(this, ResourceLocation.fromNamespaceAndPath(EndermanOverhaul.MOD_ID, "textures/entity/end_islands/end_islands_enderman_glow.png")));
+        addRenderLayer(new CustomEnderEyesLayer<>(this, ResourceLocation.fromNamespaceAndPath(EndermanOverhaul.MOD_ID, "textures/entity/end_islands/end_islands_enderman_glow_2.png")));
+        addRenderLayer(new CustomEnderEyesLayer<>(this, ResourceLocation.fromNamespaceAndPath(EndermanOverhaul.MOD_ID, "textures/entity/end_islands/end_islands_enderman_glow_3.png")));
     }
 
     @Override

@@ -6,7 +6,7 @@ import tech.alexnijjar.endermanoverhaul.EndermanOverhaul;
 import tech.alexnijjar.endermanoverhaul.common.network.messages.ClientboundFlashScreenPacket;
 
 public final class NetworkHandler {
-    public static final Network CHANNEL = new Network(new ResourceLocation(EndermanOverhaul.MOD_ID, "main"), 1);
+    public static final Network CHANNEL = new Network(ResourceLocation.fromNamespaceAndPath(EndermanOverhaul.MOD_ID, "main"), 1);
 
     public static void init() {
         CHANNEL.register(ClientboundFlashScreenPacket.TYPE);

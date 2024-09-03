@@ -10,6 +10,6 @@ public class ModBlockTags {
     public static final TagKey<Block> CAVE_ENDERMAN_HOLDEABLE = tag("cave_enderman_holdable");
 
     private static TagKey<Block> tag(String name) {
-        return TagKey.create(Registries.BLOCK, new ResourceLocation(EndermanOverhaul.MOD_ID, name));
+        return TagKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath(EndermanOverhaul.MOD_ID, name));
     }
 }

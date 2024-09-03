@@ -11,6 +11,6 @@ public class ModEntityTypeTags {
     public static final TagKey<EntityType<?>> ENDER_PEARLS = tag("ender_pearls");
 
     private static TagKey<EntityType<?>> tag(String name) {
-        return TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation(EndermanOverhaul.MOD_ID, name));
+        return TagKey.create(Registries.ENTITY_TYPE, ResourceLocation.fromNamespaceAndPath(EndermanOverhaul.MOD_ID, name));
     }
 }

@@ -6,6 +6,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
+import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -18,6 +19,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.BlockHitResult;
@@ -27,10 +29,10 @@ import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoEntity;
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.core.animation.AnimatableManager;
-import software.bernie.geckolib.core.animation.AnimationController;
-import software.bernie.geckolib.core.object.PlayState;
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.animation.AnimatableManager;
+import software.bernie.geckolib.animation.AnimationController;
+import software.bernie.geckolib.animation.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 import tech.alexnijjar.endermanoverhaul.common.ModUtils;
 import tech.alexnijjar.endermanoverhaul.common.constants.ConstantAnimations;
@@ -42,6 +44,9 @@ import java.util.UUID;
 
 public class EnderBullet extends Projectile implements GeoEntity {
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
+
+    @Override
+    protected void defineSynchedData(SynchedEntityData.Builder pBuilder) {}
 
     private static final double SPEED = 0.25;
     @Nullable
@@ -305,9 +310,10 @@ public class EnderBullet extends Projectile implements GeoEntity {
         super.onHitEntity(result);
         if (!(result.getEntity() instanceof LivingEntity target)) return;
         LivingEntity livingEntity = getOwner() instanceof LivingEntity e ? e : null;
-        if (target.hurt(this.damageSources().mobProjectile(this, livingEntity), 7.0f)) {
-            if (livingEntity != null) {
-                this.doEnchantDamageEffects(livingEntity, target);
+        DamageSource source = this.damageSources().mobProjectile(this, livingEntity);
+        if (target.hurt(source, 7)) {
+            if (livingEntity != null && this.level() instanceof ServerLevel serverlevel) {
+                EnchantmentHelper.doPostAttackEffects(serverlevel, livingEntity, source);
             }
             ModUtils.teleportTarget(level(), target, 32);
         }

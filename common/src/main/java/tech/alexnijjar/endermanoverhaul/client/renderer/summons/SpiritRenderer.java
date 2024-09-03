@@ -9,13 +9,13 @@ import tech.alexnijjar.endermanoverhaul.client.renderer.base.CustomEnderEyesLaye
 import tech.alexnijjar.endermanoverhaul.common.entities.summons.Spirit;
 
 public class SpiritRenderer extends GeoEntityRenderer<Spirit> {
-    public static final ResourceLocation TEXTURE = new ResourceLocation(EndermanOverhaul.MOD_ID, "spirit/spirit");
-    public static final ResourceLocation GLOW = new ResourceLocation(EndermanOverhaul.MOD_ID, "textures/entity/spirit/spirit_glow.png");
+    public static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(EndermanOverhaul.MOD_ID, "spirit/spirit");
+    public static final ResourceLocation GLOW = ResourceLocation.fromNamespaceAndPath(EndermanOverhaul.MOD_ID, "textures/entity/spirit/spirit_glow.png");
 
     public SpiritRenderer(EntityRendererProvider.Context renderManager) {
-        super(renderManager, new DefaultedEntityGeoModel<Spirit>(new ResourceLocation(EndermanOverhaul.MOD_ID, "spirit"))
+        super(renderManager, new DefaultedEntityGeoModel<Spirit>(ResourceLocation.fromNamespaceAndPath(EndermanOverhaul.MOD_ID, "spirit"))
             .withAltTexture(TEXTURE)
-            .withAltAnimations(new ResourceLocation(EndermanOverhaul.MOD_ID, "spirit")));
+            .withAltAnimations(ResourceLocation.fromNamespaceAndPath(EndermanOverhaul.MOD_ID, "spirit")));
         addRenderLayer(new CustomEnderEyesLayer<>(this, GLOW, false));
         addRenderLayer(new CustomEnderEyesLayer<>(this, GLOW, true));
     }

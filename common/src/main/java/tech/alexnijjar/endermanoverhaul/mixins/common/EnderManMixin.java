@@ -59,7 +59,7 @@ public abstract class EnderManMixin extends Monster implements NeutralMob {
     private void endermanoverhaul$setTarget(@Nullable LivingEntity target, CallbackInfo ci) {
         if ((Object) this instanceof BaseEnderman enderman && !enderman.speedUpWhenAngry()) {
             AttributeInstance attributeInstance = this.getAttribute(Attributes.MOVEMENT_SPEED);
-            attributeInstance.removeModifier(SPEED_MODIFIER_ATTACKING.getId());
+            attributeInstance.removeModifier(SPEED_MODIFIER_ATTACKING.id());
         }
     }
 

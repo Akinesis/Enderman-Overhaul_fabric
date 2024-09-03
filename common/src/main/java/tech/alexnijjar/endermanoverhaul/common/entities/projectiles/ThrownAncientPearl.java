@@ -17,11 +17,12 @@ import tech.alexnijjar.endermanoverhaul.common.entities.pets.AxolotlPetEnderman;
 import tech.alexnijjar.endermanoverhaul.common.entities.pets.BasePetEnderman;
 import tech.alexnijjar.endermanoverhaul.common.entities.pets.HammerheadPetEnderman;
 import tech.alexnijjar.endermanoverhaul.common.entities.pets.PetEnderman;
+import tech.alexnijjar.endermanoverhaul.common.entities.projectiles.base.BaseThrownPearl;
 import tech.alexnijjar.endermanoverhaul.common.registry.ModEntityTypes;
 import tech.alexnijjar.endermanoverhaul.common.registry.ModItems;
 import tech.alexnijjar.endermanoverhaul.common.registry.ModSoundEvents;
 
-public class ThrownAncientPearl extends ThrowableItemProjectile {
+public class ThrownAncientPearl extends BaseThrownPearl {
     @Nullable
     private Entity existingPet;
 
@@ -90,16 +91,6 @@ public class ThrownAncientPearl extends ThrowableItemProjectile {
             super.tick();
         }
 
-    }
-
-    @Nullable
-    public Entity changeDimension(@NotNull ServerLevel destination) {
-        Entity entity = this.getOwner();
-        if (entity != null && entity.level().dimension() != destination.dimension()) {
-            this.setOwner(null);
-        }
-
-        return super.changeDimension(destination);
     }
 
     public static BasePetEnderman createPet(Level level, Player player, int id) {

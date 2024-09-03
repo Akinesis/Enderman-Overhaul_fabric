@@ -1,6 +1,7 @@
 package tech.alexnijjar.endermanoverhaul.common.entities.pets;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -29,21 +30,22 @@ import net.minecraft.world.entity.monster.Creeper;
 import net.minecraft.world.entity.monster.Ghast;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.LeavesBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.pathfinder.BlockPathTypes;
+import net.minecraft.world.level.pathfinder.PathType;
 import net.minecraft.world.level.pathfinder.WalkNodeEvaluator;
 import net.minecraft.world.phys.AABB;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoEntity;
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.core.animation.AnimatableManager;
-import software.bernie.geckolib.core.animation.AnimationController;
-import software.bernie.geckolib.core.object.PlayState;
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.animation.AnimatableManager;
+import software.bernie.geckolib.animation.AnimationController;
+import software.bernie.geckolib.animation.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 import tech.alexnijjar.endermanoverhaul.common.constants.ConstantAnimations;
 import tech.alexnijjar.endermanoverhaul.common.entities.base.BaseEnderman;
@@ -67,9 +69,10 @@ public abstract class BasePetEnderman extends BaseEnderman implements GeoEntity,
         this.setOwnerUUID(owner.getUUID());
     }
 
-    protected void defineSynchedData() {
-        super.defineSynchedData();
-        this.entityData.define(DATA_OWNERUUID_ID, Optional.empty());
+    @Override
+    protected void defineSynchedData(SynchedEntityData.Builder builder) {
+        super.defineSynchedData(builder);
+        builder.define(DATA_OWNERUUID_ID, Optional.empty());
     }
 
     @Override
@@ -269,14 +272,11 @@ public abstract class BasePetEnderman extends BaseEnderman implements GeoEntity,
     protected @NotNull InteractionResult mobInteract(@NotNull Player player, @NotNull InteractionHand hand) {
         if (!player.getUUID().equals(getOwnerUUID())) return InteractionResult.PASS;
         if (!level().isClientSide()) {
-            CompoundTag entityTag = new CompoundTag();
-            CompoundTag petTag = new CompoundTag();
-            this.saveWithoutId(petTag);
-            ItemStack pearl = ModItems.ANCIENT_PEARL.get().getDefaultInstance();
-            entityTag.put("PetEntity", petTag);
-            entityTag.putString("PetType", BuiltInRegistries.ENTITY_TYPE.getKey(getType()).getPath());
-            pearl.setTag(entityTag);
-            BehaviorUtils.throwItem(this, pearl, position());
+            ItemStack stack = ModItems.ANCIENT_PEARL.get().getDefaultInstance();
+            CompoundTag tag = new CompoundTag();
+            tag.putString("id", BuiltInRegistries.ENTITY_TYPE.getKey(this.getType()).toString());
+            stack.set(DataComponents.ENTITY_DATA, CustomData.of(this.saveWithoutId(tag)));
+            BehaviorUtils.throwItem(this, stack, position());
             playSound(SoundEvents.ENDERMAN_TELEPORT);
             this.discard();
             return InteractionResult.SUCCESS;
@@ -349,14 +349,14 @@ public abstract class BasePetEnderman extends BaseEnderman implements GeoEntity,
 
         public void start() {
             this.timeToRecalcPath = 0;
-            this.oldWaterCost = getPathfindingMalus(BlockPathTypes.WATER);
-            setPathfindingMalus(BlockPathTypes.WATER, 0.0F);
+            this.oldWaterCost = getPathfindingMalus(PathType.WATER);
+            setPathfindingMalus(PathType.WATER, 0.0F);
         }
 
         public void stop() {
             this.owner = null;
             this.navigation.stop();
-            setPathfindingMalus(BlockPathTypes.WATER, this.oldWaterCost);
+            setPathfindingMalus(PathType.WATER, this.oldWaterCost);
         }
 
         public void tick() {
@@ -397,8 +397,8 @@ public abstract class BasePetEnderman extends BaseEnderman implements GeoEntity,
         }
 
         private boolean canTeleportTo(BlockPos pos) {
-            BlockPathTypes blockPathTypes = WalkNodeEvaluator.getBlockPathTypeStatic(this.level, pos.mutable());
-            if (blockPathTypes != BlockPathTypes.WALKABLE) {
+            PathType blockPathTypes = WalkNodeEvaluator.getPathTypeStatic(BasePetEnderman.this, pos.mutable());
+            if (blockPathTypes != PathType.WALKABLE) {
                 return false;
             } else {
                 BlockState blockState = this.level.getBlockState(pos.below());

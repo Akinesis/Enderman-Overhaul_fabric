@@ -28,6 +28,7 @@ public class ModBiomeTags {
     public static final TagKey<Biome> WINDSWEPT_HILLS_SPAWNS = tag("windswept_hills_spawns");
 
     private static TagKey<Biome> tag(String name) {
-        return TagKey.create(Registries.BIOME, new ResourceLocation(EndermanOverhaul.MOD_ID, name));
+
+        return TagKey.create(Registries.BIOME, ResourceLocation.fromNamespaceAndPath(EndermanOverhaul.MOD_ID, name));
     }
 }

@@ -21,13 +21,14 @@ import net.minecraft.world.phys.HitResult;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import tech.alexnijjar.endermanoverhaul.common.ModUtils;
+import tech.alexnijjar.endermanoverhaul.common.entities.projectiles.base.BaseThrownPearl;
 import tech.alexnijjar.endermanoverhaul.common.registry.ModEntityTypes;
 import tech.alexnijjar.endermanoverhaul.common.registry.ModItems;
 import tech.alexnijjar.endermanoverhaul.common.registry.ModSoundEvents;
 
 import java.util.List;
 
-public class ThrownIcyPearl extends ThrowableItemProjectile {
+public class ThrownIcyPearl extends BaseThrownPearl {
     public ThrownIcyPearl(EntityType<? extends ThrownIcyPearl> type, Level level) {
         super(type, level);
     }
@@ -116,15 +117,5 @@ public class ThrownIcyPearl extends ThrowableItemProjectile {
             super.tick();
         }
         if (this.tickCount >= 500) this.discard();
-    }
-
-    @Nullable
-    public Entity changeDimension(@NotNull ServerLevel destination) {
-        Entity entity = this.getOwner();
-        if (entity != null && entity.level().dimension() != destination.dimension()) {
-            this.setOwner(null);
-        }
-
-        return super.changeDimension(destination);
     }
 }

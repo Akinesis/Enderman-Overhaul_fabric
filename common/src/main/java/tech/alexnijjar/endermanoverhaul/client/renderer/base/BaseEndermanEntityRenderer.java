@@ -12,18 +12,18 @@ import tech.alexnijjar.endermanoverhaul.EndermanOverhaul;
 import tech.alexnijjar.endermanoverhaul.common.entities.base.BaseEnderman;
 
 public class BaseEndermanEntityRenderer<T extends BaseEnderman> extends GeoEntityRenderer<T> {
-    public static final ResourceLocation ANIMATION = new ResourceLocation(EndermanOverhaul.MOD_ID, "enderman");
-    public static final ResourceLocation ICE_SPIKES_ANIMATION = new ResourceLocation(EndermanOverhaul.MOD_ID, "ice_spikes_enderman");
-    public static final ResourceLocation SNOWY_ANIMATION = new ResourceLocation(EndermanOverhaul.MOD_ID, "snowy_enderman");
-    public static final ResourceLocation DESERT_ANIMATION = new ResourceLocation(EndermanOverhaul.MOD_ID, "desert_enderman");
-    public static final ResourceLocation SOULSAND_VALLEY_ANIMATION = new ResourceLocation(EndermanOverhaul.MOD_ID, "soulsand_valley_enderman");
-    public static final ResourceLocation END_ANIMATION = new ResourceLocation(EndermanOverhaul.MOD_ID, "end_enderman");
-    public static final ResourceLocation FLOWER_FIELDS_ANIMATION = new ResourceLocation(EndermanOverhaul.MOD_ID, "flower_fields_enderman");
-    public static final ResourceLocation END_ISLANDS_ANIMATION = new ResourceLocation(EndermanOverhaul.MOD_ID, "end_islands_enderman");
-    public static final ResourceLocation WARPED_FOREST_ANIMATION = new ResourceLocation(EndermanOverhaul.MOD_ID, "warped_forest_enderman");
-    public static final ResourceLocation CORAL_ANIMATION = new ResourceLocation(EndermanOverhaul.MOD_ID, "coral_enderman");
-    public static final ResourceLocation DARK_OAK_ANIMATION = new ResourceLocation(EndermanOverhaul.MOD_ID, "dark_oak_enderman");
-    public static final ResourceLocation WINDSWEPT_HILLS_ANIMATION = new ResourceLocation(EndermanOverhaul.MOD_ID, "windswept_hills_enderman");
+    public static final ResourceLocation ANIMATION = ResourceLocation.fromNamespaceAndPath(EndermanOverhaul.MOD_ID, "enderman");
+    public static final ResourceLocation ICE_SPIKES_ANIMATION = ResourceLocation.fromNamespaceAndPath(EndermanOverhaul.MOD_ID, "ice_spikes_enderman");
+    public static final ResourceLocation SNOWY_ANIMATION = ResourceLocation.fromNamespaceAndPath(EndermanOverhaul.MOD_ID, "snowy_enderman");
+    public static final ResourceLocation DESERT_ANIMATION = ResourceLocation.fromNamespaceAndPath(EndermanOverhaul.MOD_ID, "desert_enderman");
+    public static final ResourceLocation SOULSAND_VALLEY_ANIMATION = ResourceLocation.fromNamespaceAndPath(EndermanOverhaul.MOD_ID, "soulsand_valley_enderman");
+    public static final ResourceLocation END_ANIMATION = ResourceLocation.fromNamespaceAndPath(EndermanOverhaul.MOD_ID, "end_enderman");
+    public static final ResourceLocation FLOWER_FIELDS_ANIMATION = ResourceLocation.fromNamespaceAndPath(EndermanOverhaul.MOD_ID, "flower_fields_enderman");
+    public static final ResourceLocation END_ISLANDS_ANIMATION = ResourceLocation.fromNamespaceAndPath(EndermanOverhaul.MOD_ID, "end_islands_enderman");
+    public static final ResourceLocation WARPED_FOREST_ANIMATION = ResourceLocation.fromNamespaceAndPath(EndermanOverhaul.MOD_ID, "warped_forest_enderman");
+    public static final ResourceLocation CORAL_ANIMATION = ResourceLocation.fromNamespaceAndPath(EndermanOverhaul.MOD_ID, "coral_enderman");
+    public static final ResourceLocation DARK_OAK_ANIMATION = ResourceLocation.fromNamespaceAndPath(EndermanOverhaul.MOD_ID, "dark_oak_enderman");
+    public static final ResourceLocation WINDSWEPT_HILLS_ANIMATION = ResourceLocation.fromNamespaceAndPath(EndermanOverhaul.MOD_ID, "windswept_hills_enderman");
 
     public BaseEndermanEntityRenderer(EntityRendererProvider.Context renderManager, EntityType<?> enderman) {
         this(renderManager, enderman, ANIMATION);
@@ -66,11 +66,11 @@ public class BaseEndermanEntityRenderer<T extends BaseEnderman> extends GeoEntit
 
     public static ResourceLocation getTexture(EntityType<?> enderman) {
         String name = BuiltInRegistries.ENTITY_TYPE.getKey(enderman).getPath();
-        return new ResourceLocation(EndermanOverhaul.MOD_ID, "%s/%s".formatted(name.replace("_enderman", ""), name));
+        return ResourceLocation.fromNamespaceAndPath(EndermanOverhaul.MOD_ID, "%s/%s".formatted(name.replace("_enderman", ""), name));
     }
 
     public static ResourceLocation getGlowTexture(EntityType<?> enderman) {
         String name = BuiltInRegistries.ENTITY_TYPE.getKey(enderman).getPath();
-        return new ResourceLocation(EndermanOverhaul.MOD_ID, "textures/entity/%s/%s_glow.png".formatted(name.replace("_enderman", ""), name));
+        return ResourceLocation.fromNamespaceAndPath(EndermanOverhaul.MOD_ID, "textures/entity/%s/%s_glow.png".formatted(name.replace("_enderman", ""), name));
     }
 }

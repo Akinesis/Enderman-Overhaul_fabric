@@ -14,12 +14,13 @@ import net.minecraft.world.phys.HitResult;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import tech.alexnijjar.endermanoverhaul.common.ModUtils;
+import tech.alexnijjar.endermanoverhaul.common.entities.projectiles.base.BaseThrownPearl;
 import tech.alexnijjar.endermanoverhaul.common.registry.ModEntityTypes;
 import tech.alexnijjar.endermanoverhaul.common.registry.ModItems;
 import tech.alexnijjar.endermanoverhaul.common.registry.ModParticleTypes;
 import tech.alexnijjar.endermanoverhaul.common.registry.ModSoundEvents;
 
-public class ThrownBubblePearl extends ThrowableItemProjectile {
+public class ThrownBubblePearl extends BaseThrownPearl {
     public ThrownBubblePearl(EntityType<? extends ThrownBubblePearl> type, Level level) {
         super(type, level);
     }
@@ -39,10 +40,9 @@ public class ThrownBubblePearl extends ThrowableItemProjectile {
     }
 
     @Override
-    protected float getGravity() {
+    protected double getDefaultGravity() {
         return isInWater() ? 0.01f : 0;
     }
-
     protected void onHit(@NotNull HitResult result) {
         super.onHit(result);
 
@@ -90,15 +90,5 @@ public class ThrownBubblePearl extends ThrowableItemProjectile {
             level().playSound(null, getX(), getY(), getZ(), ModSoundEvents.BUBBLE_PEARL_HIT.get(), getSoundSource(), 1.0f, random.nextFloat() * 0.4f + 0.8f);
             this.discard();
         }
-    }
-
-    @Nullable
-    public Entity changeDimension(@NotNull ServerLevel destination) {
-        Entity entity = this.getOwner();
-        if (entity != null && entity.level().dimension() != destination.dimension()) {
-            this.setOwner(null);
-        }
-
-        return super.changeDimension(destination);
     }
 }

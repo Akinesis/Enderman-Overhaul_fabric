@@ -35,10 +35,10 @@ import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoEntity;
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.core.animation.AnimatableManager;
-import software.bernie.geckolib.core.animation.AnimationController;
-import software.bernie.geckolib.core.object.PlayState;
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.animation.AnimatableManager;
+import software.bernie.geckolib.animation.AnimationController;
+import software.bernie.geckolib.animation.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 import tech.alexnijjar.endermanoverhaul.common.config.EndermanOverhaulConfig;
 import tech.alexnijjar.endermanoverhaul.common.constants.ConstantAnimations;
@@ -254,11 +254,11 @@ public abstract class BaseEnderman extends EnderMan implements GeoEntity {
         }
     }
 
-    @Override
+    /*
     public @NotNull EntityDimensions getDimensions(@NotNull Pose pose) {
         if (!hasLargeCreepyHitbox() || !isCreepy()) return super.getDimensions(pose);
         return super.getDimensions(pose).scale(1, 1.15f);
-    }
+    }*/
 
     @Override
     protected void registerGoals() {
@@ -297,9 +297,8 @@ public abstract class BaseEnderman extends EnderMan implements GeoEntity {
         return e > 1.0 - 0.025 / d && player.hasLineOfSight(this);
     }
 
-    @Override
     protected float getStandingEyeHeight(@NotNull Pose pose, @NotNull EntityDimensions dimensions) {
-        return 2.55f + (dimensions.height - 2.9f);
+        return 2.55f + (dimensions.height()  - 2.9f);
     }
 
     @Override

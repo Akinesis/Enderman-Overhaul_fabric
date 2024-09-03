@@ -7,8 +7,8 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
+import software.bernie.geckolib.animatable.GeoAnimatable;
 import software.bernie.geckolib.cache.object.BakedGeoModel;
-import software.bernie.geckolib.core.animatable.GeoAnimatable;
 import software.bernie.geckolib.renderer.GeoRenderer;
 import software.bernie.geckolib.renderer.layer.GeoRenderLayer;
 
@@ -35,7 +35,7 @@ public class CustomEnderEyesLayer<T extends GeoAnimatable> extends GeoRenderLaye
             glow, vertexConsumer,
             partialTick,
             LightTexture.FULL_BRIGHT, OverlayTexture.NO_OVERLAY,
-            0.65f, 0.65f, 0.65f, 1
+            0xA6A6A6FF
         );
     }
 }

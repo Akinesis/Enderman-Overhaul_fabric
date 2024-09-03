@@ -2,18 +2,19 @@ package tech.alexnijjar.endermanoverhaul.common.entities;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.EnderMan;
 import net.minecraft.world.entity.monster.Monster;
-import net.minecraft.world.item.enchantment.FrostWalkerEnchantment;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.EnchantedItemInUse;
+import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import org.jetbrains.annotations.NotNull;
@@ -23,6 +24,8 @@ import tech.alexnijjar.endermanoverhaul.common.entities.base.BaseEnderman;
 import tech.alexnijjar.endermanoverhaul.common.registry.ModParticleTypes;
 
 public class SnowyEnderman extends BaseEnderman {
+
+    private final EnchantedItemInUse fakeBootsItemInUse = new EnchantedItemInUse(ItemStack.EMPTY, EquipmentSlot.FEET, this);
 
     public SnowyEnderman(EntityType<? extends EnderMan> entityType, Level level) {
         super(entityType, level);
@@ -63,9 +66,14 @@ public class SnowyEnderman extends BaseEnderman {
     }
 
     @Override
-    protected void onChangedBlock(@NotNull BlockPos pos) {
-        super.onChangedBlock(pos);
-        FrostWalkerEnchantment.onEntityMoved(this, this.level(), pos, 2);
+    protected void onChangedBlock(ServerLevel level, BlockPos pos) {
+        super.onChangedBlock(level, pos);
+        level.registryAccess().registryOrThrow(Registries.ENCHANTMENT).get(Enchantments.FROST_WALKER).runLocationChangedEffects(
+            level,
+            0,
+            this.fakeBootsItemInUse,
+            this
+        );
     }
 
     @Override

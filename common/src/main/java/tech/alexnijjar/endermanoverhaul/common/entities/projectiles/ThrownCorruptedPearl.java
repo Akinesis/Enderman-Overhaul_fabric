@@ -16,11 +16,12 @@ import net.minecraft.world.phys.HitResult;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import tech.alexnijjar.endermanoverhaul.common.ModUtils;
+import tech.alexnijjar.endermanoverhaul.common.entities.projectiles.base.BaseThrownPearl;
 import tech.alexnijjar.endermanoverhaul.common.registry.ModEntityTypes;
 import tech.alexnijjar.endermanoverhaul.common.registry.ModItems;
 import tech.alexnijjar.endermanoverhaul.common.registry.ModSoundEvents;
 
-public class ThrownCorruptedPearl extends ThrowableItemProjectile {
+public class ThrownCorruptedPearl extends BaseThrownPearl {
     public ThrownCorruptedPearl(EntityType<? extends ThrownCorruptedPearl> type, Level level) {
         super(type, level);
     }
@@ -42,17 +43,6 @@ public class ThrownCorruptedPearl extends ThrowableItemProjectile {
         } else {
             super.tick();
         }
-    }
-
-    @Nullable
-    @Override
-    public Entity changeDimension(@NotNull ServerLevel destination) {
-        Entity entity = this.getOwner();
-        if (entity != null && entity.level().dimension() != destination.dimension()) {
-            this.setOwner(null);
-        }
-
-        return super.changeDimension(destination);
     }
 
     @Override

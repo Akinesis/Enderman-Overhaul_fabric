@@ -11,8 +11,9 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.monster.EnderMan;
 import net.minecraft.world.level.block.state.BlockState;
+import software.bernie.geckolib.animatable.GeoAnimatable;
 import software.bernie.geckolib.cache.object.BakedGeoModel;
-import software.bernie.geckolib.core.animatable.GeoAnimatable;
+import software.bernie.geckolib.cache.object.GeoBone;
 import software.bernie.geckolib.renderer.GeoRenderer;
 import software.bernie.geckolib.renderer.layer.GeoRenderLayer;
 import tech.alexnijjar.endermanoverhaul.common.entities.base.BaseEnderman;
@@ -39,11 +40,11 @@ public class CustomCarriedBlockLayer<T extends GeoAnimatable> extends GeoRenderL
         try (var pose = new CloseablePoseStack(poseStack)) {
             float lerped = Mth.rotLerp(partialTick, enderman.get().yBodyRotO, enderman.get().yBodyRot);
             pose.mulPose(Axis.YP.rotationDegrees(-lerped));
-            pose.translate(0, enderman.get().getType().getDimensions().height - 2.9, 0);
+            pose.translate(0, enderman.get().getType().getDimensions().height() - 2.9, 0);
 
-            var leftArm = getGeoModel().getBone("left_arm").orElse(null);
+            GeoBone leftArm = getGeoModel().getBone("left_arm").orElse(null);
             if (leftArm == null) return;
-            poseStack.mulPoseMatrix(leftArm.getModelRotationMatrix());
+            poseStack.mulPose(leftArm.getModelRotationMatrix());
             pose.mulPose(Axis.XP.rotationDegrees(-28.6479f));
             pose.translate(0.25, -2.2, 0);
 
@@ -53,7 +54,7 @@ public class CustomCarriedBlockLayer<T extends GeoAnimatable> extends GeoRenderL
             }
 
             if (baby) {
-                pose.translate(0, -0.3, -0.3f);
+                pose.translate(0.03, 0.9, -0.3f);
             }
 
             pose.translate(0, 0.6875f, -0.75f);
@@ -64,6 +65,7 @@ public class CustomCarriedBlockLayer<T extends GeoAnimatable> extends GeoRenderL
             pose.scale(0.5f, 0.5f, 0.5f);
             pose.mulPose(Axis.YP.rotationDegrees(90));
 
+            //noinspection DataFlowIssue
             this.blockRenderer.renderSingleBlock(state, poseStack, bufferSource, packedLight, OverlayTexture.NO_OVERLAY);
         }
     }

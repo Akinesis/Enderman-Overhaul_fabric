@@ -1,5 +1,6 @@
 package tech.alexnijjar.endermanoverhaul.client;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.core.particles.ParticleType;
@@ -8,6 +9,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.Level;
 import software.bernie.geckolib.renderer.GeoArmorRenderer;
 import tech.alexnijjar.endermanoverhaul.EndermanOverhaul;
 import tech.alexnijjar.endermanoverhaul.client.config.EndermanOverhaulClientConfig;
@@ -107,7 +109,7 @@ public class EndermanOverhaulClient {
     }
 
     public static void registerItemProperties() {
-        ClientPlatformUtils.registerItemProperty(ModItems.CORRUPTED_SHIELD.get(), new ResourceLocation("blocking"), (stack, level, entity, i) ->
+        ClientPlatformUtils.registerItemProperty(ModItems.CORRUPTED_SHIELD.get(), ResourceLocation.fromNamespaceAndPath(EndermanOverhaul.MOD_ID,"blocking"), (stack, level, entity, i) ->
             entity != null && entity.isUsingItem() && entity.getUseItem() == stack ? 1 : 0);
     }
 
@@ -117,5 +119,9 @@ public class EndermanOverhaulClient {
 
     public static BlockEntityWithoutLevelRenderer getItemRenderer(ItemLike item) {
         return ITEM_RENDERERS.get(item.asItem());
+    }
+
+    public static Level getLevel() {
+        return Minecraft.getInstance().level;
     }
 }

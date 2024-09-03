@@ -6,9 +6,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import tech.alexnijjar.endermanoverhaul.common.ModUtils;
 import tech.alexnijjar.endermanoverhaul.common.constants.ConstantComponents;
 import tech.alexnijjar.endermanoverhaul.common.registry.ModItems;
@@ -17,8 +15,8 @@ import tech.alexnijjar.endermanoverhaul.common.tags.ModEntityTypeTags;
 import java.util.List;
 
 public class CorruptedBladeItem extends SwordItem {
-    public CorruptedBladeItem(Tier tier, int attackDamageModifier, float attackSpeedModifier, Properties properties) {
-        super(tier, attackDamageModifier, attackSpeedModifier, properties);
+    public CorruptedBladeItem(Tier tier, Properties properties) {
+        super(tier, properties);
     }
 
     @Override
@@ -41,7 +39,7 @@ public class CorruptedBladeItem extends SwordItem {
     }
 
     @Override
-    public void appendHoverText(@NotNull ItemStack stack, @Nullable Level level, List<Component> tooltipComponents, @NotNull TooltipFlag isAdvanced) {
+    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag isAdvanced) {
         tooltipComponents.add(ConstantComponents.CORRUPTED_BLADE_TOOLTIP);
     }
 }

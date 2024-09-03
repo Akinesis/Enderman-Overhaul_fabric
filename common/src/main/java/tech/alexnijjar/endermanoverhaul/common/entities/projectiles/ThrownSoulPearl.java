@@ -16,13 +16,14 @@ import net.minecraft.world.phys.HitResult;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import tech.alexnijjar.endermanoverhaul.common.ModUtils;
+import tech.alexnijjar.endermanoverhaul.common.entities.projectiles.base.BaseThrownPearl;
 import tech.alexnijjar.endermanoverhaul.common.registry.ModEntityTypes;
 import tech.alexnijjar.endermanoverhaul.common.registry.ModItems;
 import tech.alexnijjar.endermanoverhaul.common.registry.ModParticleTypes;
 import tech.alexnijjar.endermanoverhaul.common.registry.ModSoundEvents;
 import tech.alexnijjar.endermanoverhaul.common.tags.ModEntityTypeTags;
 
-public class ThrownSoulPearl extends ThrowableItemProjectile {
+public class ThrownSoulPearl extends BaseThrownPearl {
     @Nullable
     private Entity boundEntity;
 
@@ -48,17 +49,6 @@ public class ThrownSoulPearl extends ThrowableItemProjectile {
         } else {
             super.tick();
         }
-    }
-
-    @Nullable
-    @Override
-    public Entity changeDimension(@NotNull ServerLevel destination) {
-        Entity entity = this.getOwner();
-        if (entity != null && entity.level().dimension() != destination.dimension()) {
-            this.setOwner(null);
-        }
-
-        return super.changeDimension(destination);
     }
 
     @Override
@@ -89,7 +79,7 @@ public class ThrownSoulPearl extends ThrowableItemProjectile {
             boundEntity.playSound(SoundEvents.CHORUS_FRUIT_TELEPORT, 1.0F, 1.0F);
             boundEntity.hurt(this.damageSources().fall(), 5.0f);
             if (isOnFire()) {
-                boundEntity.setSecondsOnFire(5);
+                boundEntity.igniteForSeconds(5);
                 boundEntity.hurt(this.damageSources().onFire(), 10.0f);
             }
             boundEntity.resetFallDistance();

@@ -25,7 +25,7 @@ public record ClientboundFlashScreenPacket() implements Packet<ClientboundFlashS
 
         public Type() {
             super(ClientboundFlashScreenPacket.class,
-                new ResourceLocation(EndermanOverhaul.MOD_ID, "flash_screen"),
+                ResourceLocation.fromNamespaceAndPath(EndermanOverhaul.MOD_ID, "flash_screen"),
                 ClientboundFlashScreenPacket::new);
         }
 

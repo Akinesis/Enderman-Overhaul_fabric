@@ -19,10 +19,10 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.animatable.GeoEntity;
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.core.animation.AnimatableManager;
-import software.bernie.geckolib.core.animation.AnimationController;
-import software.bernie.geckolib.core.object.PlayState;
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.animation.AnimatableManager;
+import software.bernie.geckolib.animation.AnimationController;
+import software.bernie.geckolib.animation.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 import tech.alexnijjar.endermanoverhaul.common.constants.ConstantAnimations;
 
@@ -68,11 +68,6 @@ public class Scarab extends Monster implements GeoEntity {
     }
 
     @Override
-    public @NotNull MobType getMobType() {
-        return MobType.ARTHROPOD;
-    }
-
-    @Override
     protected Entity.@NotNull MovementEmission getMovementEmission() {
         return Entity.MovementEmission.EVENTS;
     }
@@ -95,15 +90,5 @@ public class Scarab extends Monster implements GeoEntity {
     @Override
     protected void playStepSound(@NotNull BlockPos pos, @NotNull BlockState state) {
         this.playSound(SoundEvents.SILVERFISH_STEP, 0.15F, 1.0F);
-    }
-
-    @Override
-    public float getMyRidingOffset(Entity entity) {
-        return 0.1f;
-    }
-
-    @Override
-    protected float getStandingEyeHeight(@NotNull Pose pose, @NotNull EntityDimensions dimensions) {
-        return 0.13f;
     }
 }

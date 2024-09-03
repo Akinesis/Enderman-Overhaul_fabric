@@ -17,12 +17,12 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import tech.alexnijjar.endermanoverhaul.common.ModUtils;
+import tech.alexnijjar.endermanoverhaul.common.entities.projectiles.base.BaseThrownPearl;
 import tech.alexnijjar.endermanoverhaul.common.registry.ModEntityTypes;
 import tech.alexnijjar.endermanoverhaul.common.registry.ModItems;
 
-public class ThrownWarpedPearl extends ThrowableItemProjectile {
+public class ThrownWarpedPearl extends BaseThrownPearl {
     public ThrownWarpedPearl(EntityType<? extends ThrownWarpedPearl> type, Level level) {
         super(type, level);
     }
@@ -90,14 +90,4 @@ public class ThrownWarpedPearl extends ThrowableItemProjectile {
         if (this.tickCount >= 500) this.discard();
     }
 
-    @Nullable
-    @Override
-    public Entity changeDimension(@NotNull ServerLevel destination) {
-        Entity entity = this.getOwner();
-        if (entity != null && entity.level().dimension() != destination.dimension()) {
-            this.setOwner(null);
-        }
-
-        return super.changeDimension(destination);
-    }
 }

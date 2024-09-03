@@ -14,12 +14,12 @@ import net.minecraft.world.entity.monster.EnderMan;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
-import net.minecraft.world.level.pathfinder.BlockPathTypes;
+import net.minecraft.world.level.pathfinder.PathType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import software.bernie.geckolib.core.animation.AnimatableManager;
-import software.bernie.geckolib.core.animation.AnimationController;
-import software.bernie.geckolib.core.object.PlayState;
+import software.bernie.geckolib.animation.AnimatableManager;
+import software.bernie.geckolib.animation.AnimationController;
+import software.bernie.geckolib.animation.PlayState;
 import tech.alexnijjar.endermanoverhaul.common.config.EndermanOverhaulConfig;
 import tech.alexnijjar.endermanoverhaul.common.constants.ConstantAnimations;
 import tech.alexnijjar.endermanoverhaul.common.entities.base.BaseEnderman;
@@ -30,7 +30,7 @@ public class SwampEnderman extends BaseEnderman {
     public SwampEnderman(EntityType<? extends EnderMan> entityType, Level level) {
         super(entityType, level);
         xpReward = 8;
-        setPathfindingMalus(BlockPathTypes.WATER, 0.0f);
+        setPathfindingMalus(PathType.WATER, 0.0f);
     }
 
     public static @NotNull AttributeSupplier.Builder createAttributes() {

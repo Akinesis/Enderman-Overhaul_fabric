@@ -15,12 +15,12 @@ import tech.alexnijjar.endermanoverhaul.client.renderer.base.CustomEnderEyesLaye
 import tech.alexnijjar.endermanoverhaul.common.entities.ReplacedEnderman;
 
 public class ReplacedEndermanRenderer extends GeoReplacedEntityRenderer<EnderMan, ReplacedEnderman> {
-    public static final ResourceLocation TEXTURE = new ResourceLocation(EndermanOverhaul.MOD_ID, "default/default_enderman");
-    public static final ResourceLocation GLOW = new ResourceLocation(EndermanOverhaul.MOD_ID, "textures/entity/default/default_enderman_glow.png");
+    public static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(EndermanOverhaul.MOD_ID, "default/default_enderman");
+    public static final ResourceLocation GLOW = ResourceLocation.fromNamespaceAndPath(EndermanOverhaul.MOD_ID, "textures/entity/default/default_enderman_glow.png");
 
     public ReplacedEndermanRenderer(EntityRendererProvider.Context renderManager) {
         super(renderManager, new BaseEndermanModel<>(
-                new ResourceLocation(EndermanOverhaul.MOD_ID, "default_enderman"),
+                ResourceLocation.fromNamespaceAndPath(EndermanOverhaul.MOD_ID, "default_enderman"),
                 true,
                 TEXTURE,
                 BaseEndermanEntityRenderer.ANIMATION),

@@ -43,8 +43,9 @@ public class CrimsonPearlItem extends EnderpearlItem {
         return InteractionResultHolder.sidedSuccess(itemStack, level.isClientSide());
     }
 
+
     @Override
-    public void appendHoverText(@NotNull ItemStack stack, @Nullable Level level, List<Component> tooltipComponents, @NotNull TooltipFlag isAdvanced) {
+    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag isAdvanced) {
         tooltipComponents.add(ConstantComponents.CRIMSON_PEARL_TOOLTIP);
     }
 }

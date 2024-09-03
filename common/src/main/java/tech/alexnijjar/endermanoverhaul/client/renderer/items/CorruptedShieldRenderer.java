@@ -17,10 +17,10 @@ public class CorruptedShieldRenderer extends GeoItemRenderer<CorruptedShieldItem
     }
 
     @Override
-    public void actuallyRender(PoseStack poseStack, CorruptedShieldItem animatable, BakedGeoModel model, RenderType renderType, MultiBufferSource bufferSource, VertexConsumer buffer, boolean isReRender, float partialTick, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
+    public void actuallyRender(PoseStack poseStack, CorruptedShieldItem animatable, BakedGeoModel model, RenderType renderType, MultiBufferSource bufferSource, VertexConsumer buffer, boolean isReRender, float partialTick, int packedLight, int packedOverlay, int colour) {
         poseStack.pushPose();
         poseStack.translate(0.0, -0.5, 0.0);
-        super.actuallyRender(poseStack, animatable, model, renderType, bufferSource, buffer, isReRender, partialTick, packedLight, packedOverlay, red, green, blue, alpha);
+        super.actuallyRender(poseStack, animatable, model, renderType, bufferSource, buffer, isReRender, partialTick, packedLight, packedOverlay, colour);
         poseStack.popPose();
     }
 }

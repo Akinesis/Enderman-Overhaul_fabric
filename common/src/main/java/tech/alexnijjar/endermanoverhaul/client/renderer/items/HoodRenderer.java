@@ -12,7 +12,7 @@ import tech.alexnijjar.endermanoverhaul.common.items.HoodItem;
 public class HoodRenderer extends GeoArmorRenderer<HoodItem> {
     public HoodRenderer(Item item) {
         super(new DefaultedItemGeoModel<HoodItem>(BuiltInRegistries.ITEM.getKey(item))
-            .withAltTexture(new ResourceLocation(EndermanOverhaul.MOD_ID, "armor/" + BuiltInRegistries.ITEM.getKey(item).getPath())));
+            .withAltTexture(ResourceLocation.fromNamespaceAndPath(EndermanOverhaul.MOD_ID, "armor/" + BuiltInRegistries.ITEM.getKey(item).getPath())));
     }
 
     @Override
@@ -20,10 +20,10 @@ public class HoodRenderer extends GeoArmorRenderer<HoodItem> {
         setAllVisible(false);
 
         if (EquipmentSlot.CHEST == currentSlot) {
-            setBoneVisible(this.getHeadBone(), true);
-            setBoneVisible(this.getBodyBone(), true);
-            setBoneVisible(this.getRightArmBone(), true);
-            setBoneVisible(this.getLeftArmBone(), true);
+            setBoneVisible(this.getHeadBone(this.model), true);
+            setBoneVisible(this.getBodyBone(this.model), true);
+            setBoneVisible(this.getRightArmBone(this.model), true);
+            setBoneVisible(this.getLeftArmBone(this.model), true);
         }
     }
 }

@@ -1,6 +1,6 @@
 package tech.alexnijjar.endermanoverhaul.common.registry;
 
-import com.teamresourceful.resourcefullib.common.item.tabs.ResourcefulCreativeTab;
+import com.teamresourceful.resourcefullib.common.item.tabs.ResourcefulCreativeModeTab;
 import com.teamresourceful.resourcefullib.common.registry.RegistryEntry;
 import com.teamresourceful.resourcefullib.common.registry.ResourcefulRegistries;
 import com.teamresourceful.resourcefullib.common.registry.ResourcefulRegistry;
@@ -26,10 +26,12 @@ import java.util.function.Supplier;
 public class ModItems {
     public static final ResourcefulRegistry<Item> ITEMS = ResourcefulRegistries.create(BuiltInRegistries.ITEM, EndermanOverhaul.MOD_ID);
     public static final ResourcefulRegistry<Item> SPAWN_EGGS = ResourcefulRegistries.create(ITEMS);
-    public static final Supplier<CreativeModeTab> TAB = new ResourcefulCreativeTab(new ResourceLocation(EndermanOverhaul.MOD_ID, "main"))
-        .setItemIcon(() -> ModItems.CORRUPTED_PEARL.get())
+    public static final ResourcefulRegistry<Item> PEARLS = ResourcefulRegistries.create(ITEMS);
+    public static final ResourcefulRegistry<CreativeModeTab> TABS = ResourcefulRegistries.create(BuiltInRegistries.CREATIVE_MODE_TAB, EndermanOverhaul.MOD_ID);
+    public static final RegistryEntry<CreativeModeTab> TAB = TABS.register("main", () -> new ResourcefulCreativeModeTab(ResourceLocation.fromNamespaceAndPath(EndermanOverhaul.MOD_ID, "main"))
+        .setItemIcon(ModItems.CORRUPTED_PEARL)
         .addRegistry(ITEMS)
-        .build();
+        .build());
 
     public static final RegistryEntry<Item> BADLANDS_ENDERMAN_SPAWN_EGG = SPAWN_EGGS.register("badlands_enderman_spawn_egg", createSpawnEggItem(ModEntityTypes.BADLANDS_ENDERMAN, 0xa75537, 0x5a7a60, new Item.Properties()));
     public static final RegistryEntry<Item> CAVE_ENDERMAN_SPAWN_EGG = SPAWN_EGGS.register("cave_enderman_spawn_egg", createSpawnEggItem(ModEntityTypes.CAVE_ENDERMAN, 0xc8c5b6, 0xa88554, new Item.Properties()));
@@ -60,14 +62,14 @@ public class ModItems {
     public static final RegistryEntry<Item> SAVANNAS_HOOD = ITEMS.register("savanna_hood", () -> new HoodItem(new Item.Properties().stacksTo(1)));
     public static final RegistryEntry<Item> SNOWY_HOOD = ITEMS.register("snowy_hood", () -> new HoodItem(new Item.Properties().stacksTo(1)));
 
-    public static final RegistryEntry<Item> CORRUPTED_PEARL = ITEMS.register("corrupted_pearl", () -> new CorruptedPearlItem(new Item.Properties().stacksTo(16)));
-    public static final RegistryEntry<Item> SOUL_PEARL = ITEMS.register("soul_pearl", () -> new SoulPearlItem(new Item.Properties().stacksTo(16)));
-    public static final RegistryEntry<Item> ANCIENT_PEARL = ITEMS.register("ancient_pearl", () -> new AncientPearlItem(new Item.Properties().stacksTo(16)));
-    public static final RegistryEntry<Item> BUBBLE_PEARL = ITEMS.register("bubble_pearl", () -> new BubblePearlItem(new Item.Properties().stacksTo(16)));
-    public static final RegistryEntry<Item> SUMMONER_PEARL = ITEMS.register("summoner_pearl", () -> new SummonerPearlItem(new Item.Properties().stacksTo(16)));
-    public static final RegistryEntry<Item> ICY_PEARL = ITEMS.register("icy_pearl", () -> new IcyPearlItem(new Item.Properties().stacksTo(16)));
-    public static final RegistryEntry<Item> CRIMSON_PEARL = ITEMS.register("crimson_pearl", () -> new CrimsonPearlItem(new Item.Properties().stacksTo(16)));
-    public static final RegistryEntry<Item> WARPED_PEARL = ITEMS.register("warped_pearl", () -> new WarpedPearlItem(new Item.Properties().stacksTo(16)));
+    public static final RegistryEntry<Item> CORRUPTED_PEARL = PEARLS.register("corrupted_pearl", () -> new CorruptedPearlItem(new Item.Properties().stacksTo(16)));
+    public static final RegistryEntry<Item> SOUL_PEARL = PEARLS.register("soul_pearl", () -> new SoulPearlItem(new Item.Properties().stacksTo(16)));
+    public static final RegistryEntry<Item> ANCIENT_PEARL = PEARLS.register("ancient_pearl", () -> new AncientPearlItem(new Item.Properties().stacksTo(16)));
+    public static final RegistryEntry<Item> BUBBLE_PEARL = PEARLS.register("bubble_pearl", () -> new BubblePearlItem(new Item.Properties().stacksTo(16)));
+    public static final RegistryEntry<Item> SUMMONER_PEARL = PEARLS.register("summoner_pearl", () -> new SummonerPearlItem(new Item.Properties().stacksTo(16)));
+    public static final RegistryEntry<Item> ICY_PEARL = PEARLS.register("icy_pearl", () -> new IcyPearlItem(new Item.Properties().stacksTo(16)));
+    public static final RegistryEntry<Item> CRIMSON_PEARL = PEARLS.register("crimson_pearl", () -> new CrimsonPearlItem(new Item.Properties().stacksTo(16)));
+    public static final RegistryEntry<Item> WARPED_PEARL = PEARLS.register("warped_pearl", () -> new WarpedPearlItem(new Item.Properties().stacksTo(16)));
 
     public static final RegistryEntry<Item> ENDERMAN_TOOTH = ITEMS.register("enderman_tooth", () -> new Item(new Item.Properties()));
     public static final RegistryEntry<Item> CORRUPTED_BLADE = ITEMS.register("corrupted_blade", () -> new CorruptedBladeItem(Tiers.IRON, 3, -2.4f, new Item.Properties()));
