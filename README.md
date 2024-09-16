@@ -1,25 +1,5 @@
 # Enderman Overhaul
 
-To add this library to your project, do the following:
-
-Kotlin DSL:
-```kotlin
-repositories {
-    maven(url = "https://maven.teamresourceful.com/repository/maven-public/")
-}
-
-dependencies {
-    implementation("tech.alexnijjar.endermanoverhaul:endermanoverhaul-neoforge-$minecraftVersion:$endermanOverhaulVersion")
-}
-```
-
-Groovy DSL:
-```groovy
-repositories {
-    maven { url "https://maven.teamresourceful.com/repository/maven-public/" }
-}
-
-dependencies {
-    implementation "tech.alexnijjar.endermanoverhaul:endermanoverhaul-neoforge-$minecraftVersion:$endermanOverhaulVersion"
-}
-```
+This is an official port of the mod to fabric 1.21 / 1.21.1
+I do not have any right to this mod nore any of it's assets.
+ Installing this mod is at your own risks.
